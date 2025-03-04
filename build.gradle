@@ -35,7 +35,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation include("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
 }
 
 processResources {
@@ -86,11 +86,12 @@ tasks.register("prodServer", net.fabricmc.loom.task.prod.ServerProductionRunTask
 
     // The version of Fabric Loader to use.
     // Defaults to the version of Fabric Loader that the project is using.
-    loaderVersion = "0.16.10"
+    loaderVersion = "${loader_version}"
 
     // The version of Minecraft to use.
     // Defaults to the version of Minecraft that the project is using.
-    minecraftVersion = "1.21.4"
+    minecraftVersion = "${minecraft_version}"
+
 }
 
 // configure the maven publication
