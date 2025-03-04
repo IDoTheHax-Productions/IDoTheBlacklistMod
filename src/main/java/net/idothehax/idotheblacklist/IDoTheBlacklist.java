@@ -55,8 +55,8 @@ public class IDoTheBlacklist implements ModInitializer {
                     try {
                         JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
                         if (!jsonResponse.isJsonNull() && !jsonResponse.entrySet().isEmpty()) {
-                            // Assuming the API returns a non-empty JSON object if blacklisted
-                            server.execute(() -> handler.disconnect(Text.literal("You are blacklisted from this server.")));
+                            String reason = jsonResponse.has("reason") ? jsonResponse.get("reason").getAsString() : "No reason provided.";
+                            server.execute(() -> handler.disconnect(Text.literal("§bYou are blacklisted from this server.\n§cReason: " + reason)));
                         }
                     } catch (Exception e) {
                         LOGGER.error("Error parsing blacklist response: {}", responseBody, e);
