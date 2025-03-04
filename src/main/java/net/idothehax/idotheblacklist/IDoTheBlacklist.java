@@ -9,9 +9,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
@@ -56,7 +58,12 @@ public class IDoTheBlacklist implements ModInitializer {
                         JsonObject jsonResponse = JsonParser.parseString(responseBody).getAsJsonObject();
                         if (!jsonResponse.isJsonNull() && !jsonResponse.entrySet().isEmpty()) {
                             String reason = jsonResponse.has("reason") ? jsonResponse.get("reason").getAsString() : "No reason provided.";
-                            server.execute(() -> handler.disconnect(Text.literal("§bYou are blacklisted from this server.\n§cReason: " + reason)));
+                            String timestamp = jsonResponse.has("timestamp") ? jsonResponse.get("timestamp").getAsString() : "Time of ban unavailable";
+                            server.execute(() -> handler.disconnect(Text.literal("§l §bYou are blacklisted from this server.\n§r §cReason: " + reason + "\n§r §cTimestamp: " + timestamp)));
+
+                            // Notify ops about the happening
+                            broadcastToOperators(server, "Player " + player.getName().getString() + " was blacklisted. Reason: " + reason + " at " + timestamp);
+
                         }
                     } catch (Exception e) {
                         LOGGER.error("Error parsing blacklist response: {}", responseBody, e);
@@ -64,5 +71,14 @@ public class IDoTheBlacklist implements ModInitializer {
                 }
             });
         });
+    }
+
+    private void broadcastToOperators(MinecraftServer server, String message) {
+        List<ServerPlayerEntity> players = server.getPlayerManager().getPlayerList();
+        for (ServerPlayerEntity player : players) {
+            if (player.hasPermissionLevel(4)) { // Permission level 4 corresponds to operators
+                player.sendMessage(Text.literal(message));
+            }
+        }
     }
 }
