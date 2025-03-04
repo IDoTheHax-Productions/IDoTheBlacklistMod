@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "idotheblacklist",
+  "version": "${version}",
+  "name": "IDoTheBlacklist",
+  "description": "The blacklist aims to ban troublesome players across networks that use this mod, Proudly uses IDoTheAPI",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/idotheblacklist/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "net.idothehax.idotheblacklist.IDoTheBlacklist"
+    ]
+  },
+  "mixins": [
+    "idotheblacklist.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
