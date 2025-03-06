@@ -34,5 +34,5 @@ jobs:
           version: ${{ github.ref_name }}
           changelog-file: README.md
           loaders: fabric
-          game-versions: 1.21.2
+          game-versions: 1.21.4
           fail-mode: warn
