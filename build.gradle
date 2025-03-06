@@ -100,10 +100,10 @@ import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
     token = '$MODRINTH_TOKEN' // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
     projectId = 'KwrF4Ziw' // The ID of your Modrinth project. Slugs will not work.
-    versionNumber = '1.0.0' // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
+    versionNumber = "${minecraft_version}-${mod_version}" // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
     versionName = 'My awesome release' // The version title. If not specified, it'll use the version number
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
-    gameVersions = ['1.18', '1.18.1', '1.18.2'] // An array of game versions the version supports
+    gameVersions = ['1.21'] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
     dependencies = [
             new ModDependency('P7dR8mSH', 'required') // Creates a new required dependency on Fabric API

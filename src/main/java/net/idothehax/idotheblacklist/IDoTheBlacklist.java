@@ -9,7 +9,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +60,15 @@ public class IDoTheBlacklist implements ModInitializer {
                                         return 1;
                                     }))
                             .executes(context -> {
-                                context.getSource().sendError(Text.literal("Please provide an API key: /setapikey <key>"));
+                                context.getSource().sendError(Text.literal("Please provide an API key: /setapikey <key>, you can get one in the ")
+                                        .append(Text.literal("discord")
+                                                .setStyle(Style.EMPTY
+                                                        .withColor(TextColor.fromRgb(0x7289DA))
+                                                        .withUnderline(true)
+                                                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/aVYMFKRZGa"))
+                                                )
+                                        )
+                                );
                                 return 0;
                             })
             );
