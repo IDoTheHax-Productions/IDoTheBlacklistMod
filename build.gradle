@@ -105,6 +105,7 @@ modrinth {
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = ['1.21'] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
+    changelog = file("README.md").text
     dependencies = [
             new ModDependency('P7dR8mSH', 'required') // Creates a new required dependency on Fabric API
     ]
