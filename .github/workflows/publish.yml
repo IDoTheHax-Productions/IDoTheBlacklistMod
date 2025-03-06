@@ -32,7 +32,7 @@ jobs:
           files: build/libs/*.jar
           name: ${{ github.ref_name }}
           version: ${{ github.ref_name }}
-          changelog-file: CHANGELOG.md
+          changelog-file: README.md
           loaders: fabric
           game-versions: 1.21.2
           fail-mode: warn
