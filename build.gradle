@@ -98,10 +98,10 @@ tasks.register("prodServer", net.fabricmc.loom.task.prod.ServerProductionRunTask
 import com.modrinth.minotaur.dependencies.ModDependency
 
 modrinth {
-    token = '$MODRINTH_TOKEN' // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
+    token = System.getenv("MODRINTH_TOKEN") // Please use an environment variable for this! The default is `$MODRINTH_TOKEN`.
     projectId = 'KwrF4Ziw' // The ID of your Modrinth project. Slugs will not work.
     versionNumber = "${minecraft_version}-${mod_version}" // The (preferably SemVer) version of the mod. If not specified, it'll use the `version` declaration
-    versionName = 'My awesome release' // The version title. If not specified, it'll use the version number
+    versionName = '${minecraft_version}-${mod_version}' // The version title. If not specified, it'll use the version number
     uploadFile = remapJar // Tells Minotaur to use the remapped jar
     gameVersions = ['1.21'] // An array of game versions the version supports
     loaders = ['fabric'] // Self-explanatory.
