@@ -98,16 +98,12 @@ The configuration file for IDoTheBlacklist is located at `config/idotheblacklist
 
 -   If the API key is invalid, the API will reject the request, and the mod will skip the blacklist check and allow players to join.
 -   Server operators will receive a warning message indicating that the API key is invalid.
--   Verify that you have entered the correct API key using the `/setapikey` command.
+-   Verify that you have created an api key from the discord and entered the correct API key using the `/setapikey` command.
 
 ### Blacklisted Players Still Joining
 
 -   If a player is blacklisted but is still able to join the server, ensure that the API is functioning correctly and that the player's UUID is present in the blacklist.
 -   Check the server logs for any errors or warnings related to the blacklist check.
-
-### Discord Link Not Working
-
-- Make sure the discord link works as expected.
 
 ## Support
 
