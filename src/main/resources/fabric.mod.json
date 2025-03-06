@@ -7,16 +7,13 @@
   "authors": [],
   "contact": {},
   "license": "All-Rights-Reserved",
-  "icon": "assets/idotheblacklist/icon.png",
+  "icon": "icon.png",
   "environment": "server",
   "entrypoints": {
     "main": [
       "net.idothehax.idotheblacklist.IDoTheBlacklist"
     ]
   },
-  "mixins": [
-    "idotheblacklist.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
