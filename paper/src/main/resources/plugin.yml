@@ -1,0 +1,10 @@
+name: IdoTheBlacklist
+version: ${version}
+main: net.idothehax.idotheblacklist.paper.IdoTheBlacklist
+api-version: '1.21'
+author: idothehax
+description: A blacklist system for Minecraft servers
+commands:
+  setapikey:
+    description: Sets the API key for the blacklist service
+    usage: /setapikey <key>

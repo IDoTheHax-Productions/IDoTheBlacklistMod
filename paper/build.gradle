@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+repositories {
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+}
+
+dependencies {
+    implementation project(':common')
+    compileOnly 'io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT'
+}
+
+processResources {
+    filesMatching("plugin.yml") {
+        expand "version": project.version
+    }
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    relocate 'com.idotheblacklist.common', 'com.idotheblacklist.paper.lib.common'
+}
+
+tasks.build.dependsOn tasks.shadowJar

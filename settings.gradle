@@ -7,3 +7,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+rootProject.name = 'idotheblacklist'
+include 'common', 'fabric', 'paper'
