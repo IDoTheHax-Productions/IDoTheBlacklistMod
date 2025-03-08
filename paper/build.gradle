@@ -1,15 +1,23 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.gradleup.shadow' version '8.3.6'
 }
 
+group = 'net.idothehax.idotheblacklist'
+version = '1.0.0'
+description = 'A Paper plugin for checking blacklists on player join'
+
 repositories {
+    mavenCentral()
     maven { url 'https://repo.papermc.io/repository/maven-public/' }
 }
 
 dependencies {
     implementation project(':common')
     compileOnly 'io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'ch.qos.logback:logback-classic:1.5.6'
+    implementation 'com.google.code.gson:gson:2.11.0'
 }
 
 processResources {
@@ -20,7 +28,24 @@ processResources {
 
 shadowJar {
     archiveClassifier.set('')
+    archiveFileName = "IDoTheBlacklist-Paper-${version}.jar"
     relocate 'com.idotheblacklist.common', 'com.idotheblacklist.paper.lib.common'
+    relocate 'org.slf4j', 'net.idothehax.idotheblacklist.shadow.slf4j'
+    relocate 'ch.qos.logback', 'net.idothehax.idotheblacklist.shadow.logback'
+    relocate 'com.google.gson', 'net.idothehax.idotheblacklist.shadow.gson'
+
+    // Add SLF4J service provider configuration
+    mergeServiceFiles()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 tasks.build.dependsOn tasks.shadowJar

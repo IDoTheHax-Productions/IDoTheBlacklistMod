@@ -1,9 +1,9 @@
-name: IdoTheBlacklist
+name: IDoTheBlacklist-Paper
 version: ${version}
-main: net.idothehax.idotheblacklist.paper.IdoTheBlacklist
+main: net.idothehax.idotheblacklist.paper.IDoTheBlacklist
 api-version: '1.21'
-author: idothehax
-description: A blacklist system for Minecraft servers
+author: IDoTheHax
+description: The Blacklist aims to ban troublesome players across networks that use this mod, Proudly uses IDoTheAPI
 commands:
   setapikey:
     description: Sets the API key for the blacklist service
