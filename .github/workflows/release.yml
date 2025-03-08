@@ -21,6 +21,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
       - name: Build Fabric Mod with Gradle
         run: ./gradlew :fabric:build -Pminecraft_version=1.21.1 -Pyarn_mappings=1.21.1+build.2 -Pfabric_version=0.107.0+1.21.1
 
