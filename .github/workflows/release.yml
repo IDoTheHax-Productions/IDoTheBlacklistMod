@@ -3,7 +3,7 @@ name: Publish Mod and Plugin
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*' # Trigger on version tags like v1.0.0
 
 jobs:
   build:
@@ -21,8 +21,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Build with Gradle
-        run: ./gradlew :fabric:build :paper:shadowJar
+      - name: Build Fabric Mod with Gradle
+        run: ./gradlew :fabric:build -Pminecraft_version=1.21.1 -Pyarn_mappings=1.21.1+build.2 -Pfabric_version=0.107.0+1.21.1
+
+      - name: Build Paper Plugin with Gradle
+        run: ./gradlew :paper:shadowJar -Ppaper_version=1.21.1-R0.1-SNAPSHOT
 
       - name: Publish Fabric Mod to Modrinth and GitHub
         uses: Kir-Antipov/mc-publish@v3.3
@@ -34,21 +37,8 @@ jobs:
           name: "IDoTheBlacklist Fabric ${{ github.ref_name }}"
           version: ${{ github.ref_name }}
           changelog-file: README.md
-          loaders: fabric
-          game-versions: 1.21.2
-
-      - name: Publish Paper Plugin to Modrinth and GitHub
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          modrinth-id: KwrF4Ziw
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          files: fabric/build/libs/!(*-@(dev|sources)).jar
-          name: "IDoTheBlacklist Paper ${{ github.ref_name }}"
-          version: ${{ github.ref_name }}
-          changelog-file: README.md
-          loaders: paper
-          game-versions: 1.21
+          loaders: ["fabric", "paper"]
+          game-versions: ["1.21.1", "1.21.2", "1.21.3", "1.21.4"]
 
       - name: Publish Paper Plugin to GitHub Releases
         uses: softprops/action-gh-release@v2
